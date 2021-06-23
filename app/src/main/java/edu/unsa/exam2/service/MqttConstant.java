@@ -3,14 +3,14 @@ package edu.unsa.exam2.service;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 
 public class MqttConstant {
-    public static String clientId = "AndroidClient-57ee0171-de60-4e7a-86db-b2c58e2b034b";
-    public static String mqttUsername = "username";
-    public static String mqttPassword = "password";
-    public static String mqttHost = "thingsboard.cloud";
-    public static String mqttPort = "1883";
-    public static String mqttTopic = "v1/devices/me/telemetry";
+    public static String clientId = "AndroidClient"; // JavaClient
+    public static String mqttUsername = "android"; // java
+    public static String mqttPassword = "12345678"; // 12345678
+    public static String mqttHost = "node02.myqtthub.com";
+    public static Integer mqttPort = 1883;
+    public static String sensorName = "sensor";
+    public static String mqttTopic = "unsa/devices/android/" + sensorName;
     public static Integer mqttQOS = 0;
-
     public static MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
 
     static {
