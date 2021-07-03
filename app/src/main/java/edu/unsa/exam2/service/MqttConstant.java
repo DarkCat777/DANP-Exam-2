@@ -11,6 +11,7 @@ public class MqttConstant {
     public static String sensorName = "acelerometerSensor";
     public static String mqttTopic = "unsa/devices/android/" + sensorName;
     public static Integer mqttQOS = 0;
+
     public static MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
 
     static {
