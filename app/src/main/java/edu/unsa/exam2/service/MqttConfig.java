@@ -11,13 +11,11 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import static edu.unsa.exam2.service.MqttConstant.*;
 
 public class MqttConfig {
-    private Context context;
-    private String tag = MqttConfig.class.getName();
-    private MqttAndroidClient mqttAndroidClient;
+    private final String tag = MqttConfig.class.getName();
+    private final MqttAndroidClient mqttAndroidClient;
 
     public MqttConfig(Context context) {
-        this.context = context;
-        this.mqttAndroidClient = new MqttAndroidClient(this.context, "tcp://" + mqttHost + ":" + mqttPort, clientId);
+        this.mqttAndroidClient = new MqttAndroidClient(context, "tcp://" + mqttHost + ":" + mqttPort, clientId);
     }
 
     public void publishMessage(String message) {
