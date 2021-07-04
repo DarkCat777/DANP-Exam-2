@@ -64,7 +64,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSensorChanged(SensorEvent event) {
                 if (event != null) {
-                    actualGeneralAceleration = Filter.getGeneralAceleration(event);
+                    //actualGeneralAceleration = Filter.getGeneralAceleration(event);
+                    actualGeneralAceleration= FilterHighPass.getGeneralAceleration(event);
                 }
             }
 
@@ -128,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
                     publishProgress();
                     try {
                         Thread.sleep(500);
-                        if (actualGeneralAceleration >= 10) {
+                        if (actualGeneralAceleration >= 4) {
                             StepsStorage.incrementSteps();
                             mqtt_config.publishMessage(StepsStorage.getStepsCount() + "");
                         }
