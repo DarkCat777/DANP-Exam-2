@@ -2,44 +2,163 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
+	android:background="@drawable/fondo2"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	tools:context=".MainActivity">
 
-	<TextView
-		android:id="@+id/label_test"
-		android:layout_width="wrap_content"
+	<LinearLayout
+		android:id="@+id/linearLayout2"
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="208dp"
-		android:text="N° de Pasos"
-		android:textColor="#000000"
-		android:textSize="34sp"
+		android:layout_marginBottom="50dp"
+		android:orientation="vertical"
+		app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="horizontal">
+
+			<FrameLayout
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+
+				android:layout_marginLeft="40dp"
+				android:layout_marginRight="20dp">
+
+				<ProgressBar
+					android:id="@+id/progressBarA"
+					style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+					android:layout_width="100dp"
+					android:layout_height="100dp"
+					android:layout_gravity="center"
+					android:background="@drawable/circle_shape"
+					android:indeterminate="false"
+					android:padding="10dp"
+					android:progress="0"
+					android:progressDrawable="@drawable/circular_progressbar" />
+
+				<TextView
+					android:id="@+id/label_test_a"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center"
+					android:text="0"
+					android:textAlignment="center"
+					android:textColor="@color/white"
+					android:textSize="34sp" />
+			</FrameLayout>
+
+			<FrameLayout
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_gravity="center"
+				android:layout_marginLeft="60dp"
+				android:layout_marginRight="20dp">
+
+				<ProgressBar
+					android:id="@+id/progressBarS"
+					style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+					android:layout_width="100dp"
+					android:layout_height="100dp"
+					android:layout_gravity="center"
+					android:background="@drawable/circle_shape"
+					android:indeterminate="false"
+					android:padding="10dp"
+					android:progress="0"
+					android:progressDrawable="@drawable/circular_progressbar" />
+
+				<TextView
+					android:id="@+id/label_test_s"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center"
+					android:text="0"
+					android:textAlignment="center"
+					android:textColor="@color/white"
+					android:textSize="34sp" />
+			</FrameLayout>
+
+		</LinearLayout>
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/linearLayout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="15dp"
+		android:gravity="center"
+		android:orientation="horizontal"
+		app:layout_constraintBottom_toTopOf="@+id/bt_salir"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.0"
+		app:layout_constraintStart_toStartOf="parent">
+
+		<Button
+			android:id="@+id/bt_start_stop_a"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="20dp"
+			android:layout_marginRight="20dp"
+			android:backgroundTint="#00053C"
+			android:textColor="@color/white"
+			android:onClick="startStopFunctionAcel"
+			android:padding="15dp"
+			android:text="Iniciar\nAcelerometro" />
+
+		<Button
+			android:id="@+id/bt_start_stop_s"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="20dp"
+			android:backgroundTint="#00053C"
+			android:textColor="@color/white"
+			android:layout_marginRight="20dp"
+			android:onClick="startStopFunctionSen"
+			android:text="Iniciar Sensor" />
+
+	</LinearLayout>
+
+	<ImageView
+		android:id="@+id/imageView"
+		android:layout_width="wrap_content"
+		android:layout_height="150dp"
+		android:layout_marginTop="50dp"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toTopOf="parent" />
+		app:layout_constraintTop_toTopOf="parent"
+		app:srcCompat="@drawable/runner" />
 
 	<Button
-		android:id="@+id/bt_start_stop"
+		android:id="@+id/reiniciar"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="132dp"
-		android:onClick="startStopFunction"
-		android:text="Iniciar"
+		android:layout_marginBottom="40dp"
+		android:backgroundTint="#00053C"
+		android:textColor="@color/white"
+		android:onClick="restartValues"
+		android:text="Reiniciar valores"
+		app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
 		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintHorizontal_bias="0.498"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/label_test" />
+		app:layout_constraintStart_toStartOf="parent" />
 
 	<Button
 		android:id="@+id/bt_salir"
-		android:layout_width="wrap_content"
+		android:layout_width="0dp"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="40dp"
+		android:layout_marginStart="80dp"
+		android:layout_marginEnd="80dp"
+		android:backgroundTint="#00053C"
+		android:textColor="@color/white"
+		android:layout_marginBottom="50dp"
 		android:onClick="closeApp"
-		android:text="Salir"
+		android:text="Cerrar Aplicación"
+		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintHorizontal_bias="0.498"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/bt_start_stop" />
+		app:layout_constraintHorizontal_bias="0.0"
+		app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

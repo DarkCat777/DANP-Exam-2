@@ -9,8 +9,10 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import edu.unsa.exam2.model.Filter;
@@ -24,9 +26,16 @@ public class MainActivity extends AppCompatActivity {
     double actualGeneralAceleration;
     SensorEventListener stepDetector;
 
-    TextView tv_test;
-    Button start_stop;
+    ProgressBar progressBarA;
+    ProgressBar progressBarS;
+    private int progressStatus = 0;
+    private Handler handler = new Handler();
+
+    TextView tv_test_a;
+    TextView tv_test_s;
+    Button start_stop_a, start_stop_s;
     Button exit;
+    Button restart;
     boolean on;
 
     MqttConfig mqtt_config;
@@ -36,9 +45,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tv_test = (TextView) findViewById(R.id.label_test);
-        start_stop = (Button) findViewById(R.id.bt_start_stop);
+        tv_test_a = (TextView) findViewById(R.id.label_test_a);
+        tv_test_s = (TextView) findViewById(R.id.label_test_s);
+        start_stop_a = (Button) findViewById(R.id.bt_start_stop_a);
+        start_stop_s = (Button) findViewById(R.id.bt_start_stop_s);
+        restart = (Button) findViewById(R.id.reiniciar);
         exit = (Button) findViewById(R.id.bt_salir);
+        progressBarA = (ProgressBar) findViewById(R.id.progressBarA);
+        progressBarS = (ProgressBar) findViewById(R.id.progressBarS);
+
 
         sensor_manager = (SensorManager) getSystemService(SENSOR_SERVICE);
         acelerometer = sensor_manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -61,14 +76,29 @@ public class MainActivity extends AppCompatActivity {
         sensor_manager.registerListener(stepDetector, acelerometer, SensorManager.SENSOR_DELAY_FASTEST);
         on = false;
     }
+    public void restartValues(View v){
+        tv_test_a.setText(0+"");
+        tv_test_s.setText(0+"");
+        progressBarA.setProgress(0);
+        progressBarS.setProgress(0);
+    }
 
-    public void startStopFunction(View v) {
+    public void startStopFunctionAcel(View v) {
         if (on) {
             pauseFunction();
-            start_stop.setText("Iniciar");
+            start_stop_a.setText("Iniciar\nAcelerometro");
         } else {
             resumeFunction();
-            start_stop.setText("Detener");
+            start_stop_a.setText("Detener\nAcelerometro");
+        }
+    }
+    public void startStopFunctionSen(View v) {
+        if (on) {
+            pauseFunction();
+            start_stop_s.setText("Iniciar\nSensor");
+        } else {
+            resumeFunction();
+            start_stop_s.setText("Detener\nSensor");
         }
     }
 
@@ -112,8 +142,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected void onProgressUpdate(Object[] values) {
                 super.onProgressUpdate(values);
-                TextView acimut = findViewById(R.id.label_test);
-                acimut.setText("Pasos: " + StepsStorage.getStepsCount());
+                TextView acimut = findViewById(R.id.label_test_a);
+                acimut.setText(StepsStorage.getStepsCount()+"");
+                progressBarA.setProgress(StepsStorage.getStepsCount());
+
             }
         };
         on = true;
