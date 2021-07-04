@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import edu.unsa.exam2.model.Filter;
+import edu.unsa.exam2.model.FilterHighPass;
 import edu.unsa.exam2.model.StepsStorage;
 import edu.unsa.exam2.service.MqttConfig;
 
